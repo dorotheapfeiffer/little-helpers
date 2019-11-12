@@ -1,0 +1,1 @@
+This folder contains the apv2root program for non-zero-suppressed and zero suppressed APV-25 data. The data files have been created with the program DATE. To build the program, it is necessary to have root (https://root.cern.ch/) installed. Type "make all" to create the executable. Type "./apv2root" to learn how to use the program.
