@@ -35,12 +35,9 @@ bool clusteringOn = true;
 bool pFound = false;
 bool rdFound = false;
 bool rpFound = false;
-bool nFound = false;
 bool commonModeFound = false;
 bool clusteringFound = false;
 bool zsCutFound = false;
-bool uFound = false;
-bool vFound = false;
 bool xFound = false;
 bool yFound = false;
 
@@ -72,11 +69,6 @@ int main(int argc, char**argv)
 		{
 			pFound = true;
 			pedestalName = argv[i + 1];
-		}
-		else if (strncmp(argv[i], "-n", 2) == 0)
-		{
-			nFound = true;
-			numEvents = atof(argv[i + 1]);
 		}
 		else if (strncmp(argv[i], "-zsc", 4) == 0)
 		{
@@ -174,7 +166,7 @@ int main(int argc, char**argv)
 		return printUsage("Wrong combination of arguments!");
 
 	}
-	if ((zsCutFound && zsCut < 0) || (nFound && numEvents == 0))
+	if (zsCutFound && zsCut < 0)
 	{
 		return printUsage("Wrong combination of arguments!");
 	}
@@ -324,8 +316,7 @@ int printUsage(std::string errorMessage)
 					"Per event it is checked whether the mean strip ADC is over the threshold, in which case the strip is included in the data.\n");
 	printf(
 			"-cm: common_mode subtraction for non-zero supressed data.\n\tFor the common mode subtraction, for each time bin the avearage ADC value from all strips is calculated. This average is then subtracted from the time bin ADC value of the strip that is being analyzed.");
-	printf(
-			"-n: number of events to analyze. Optional argument.\n\tIf not used, all events in the file will be analyzed.\n");
+	
 	printf("-cl: Add clustering.\n\n");
 	printf("-x: mapping of chips, list of chips in x direction separated by comma\n\n");
 	printf("-y: mapping of chips, list of chips in y direction separated by comma\n\n");
