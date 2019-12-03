@@ -6,11 +6,11 @@
 
 RootFile::RootFile(TString fileName, TString pedestalName,
 		bool isRawPedestalRun, bool isPedestalRun, bool isZSRun, bool clusteringOn,
-		std::vector<int> xChips, std::vector<int> yChips) :
+		std::vector<int> xChips, std::vector<int> yChips, int mapping) :
 		isRawPedestalRun(isRawPedestalRun), isPedestalRun(isPedestalRun), isZSRun(
 				isZSRun), clusteringOn(clusteringOn), fFileName(
 				fileName), fPedestalName(pedestalName), xChipIDs(xChips), yChipIDs(
-				yChips)
+				yChips), mapping(mapping)
 {
 
 	
@@ -1083,7 +1083,24 @@ int RootFile::GetStripNumber(int chNo)
 {
 	chNo = (32 * (chNo % 4)) + (8 * (int) (chNo / 4))
 			- (31 * (int) (chNo / 16));
-
+	//CMS		
+	if(mapping == 1) {
+		if(chNo%2 == 1) {
+			chNo = (127 - chNo)/2;
+		} 
+		else {		
+			chNo = 64 + chNo/2;
+		}
+	}
+	//CMS inverted	
+	else if(mapping == 2) {
+		if(chNo%2 == 1) {
+			chNo = 64 + (127 - chNo)/2;
+		} 
+		else {		
+			chNo = chNo/2;
+		}
+	}	
 	return chNo;
 }
 

@@ -5,7 +5,7 @@
 RawdataParser::RawdataParser(std::string fileName, std::string pedestalName,
 		bool isRawPedestal, bool isPedestal, bool isZS, float zsCut,
 		bool commonModeOn, bool clusteringOn, std::vector<int> xChips,
-		std::vector<int> yChips) :
+		std::vector<int> yChips, int mapping) :
 		isRawPedestalRun(isRawPedestal), isPedestalRun(isPedestal), isZSRun(
 				isZS), fZsCut(zsCut), commonModeOn(commonModeOn)
 {
@@ -75,7 +75,7 @@ RawdataParser::RawdataParser(std::string fileName, std::string pedestalName,
 				ending.str());
 	}
 	fRoot = new RootFile(fileName, pedestalName, isRawPedestal, isPedestal,
-			isZSRun, clustering, xChips, yChips);
+			isZSRun, clustering, xChips, yChips, mapping);
 
 	
 }

@@ -27,7 +27,7 @@ public:
 	RootFile(TString fileName, TString pedestalName, bool isRawPedestalRun,
 			bool isPedestalRun, bool isZSRun, bool clusteringOn,
 			std::vector<int> xChips,
-			std::vector<int> yChips);
+			std::vector<int> yChips, int mapping);
 	~RootFile();
 
 	void InitRootFile();
@@ -85,7 +85,9 @@ private:
 
 	std::vector<int> xChipIDs;
 	std::vector<int> yChipIDs;
-
+	
+	
+	int mapping;
 	int m_timestamp; 		//Unix time stamp
 	int m_us;
 	int m_evtID;

@@ -27,13 +27,13 @@ forceall: clean executable
 executable: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) $(DICTOBJ)
-	$(CXX) -v $(CXXFLAGS) -std=c++11 -O2 -Wall $^ $(LIBS) -o $@ # This line works
+	$(CXX) -v $(CXXFLAGS) -O2 -Wall $^ $(LIBS) -o $@ # This line works
 	
 
 objects: $(OBJECTS) $(DICTOBJ)
 
 %.o: %.cxx
-	$(CXX) $(CXXFLAGS) -std=c++11 -O2 -Wall  -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -O2 -Wall  -c -o $@ $<
 
 dictionary: $(DICTIONARY)
 

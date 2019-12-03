@@ -10,7 +10,7 @@ public:
 	RawdataParser(std::string fileName, std::string pedestalName,
 		bool isRawPedestal, bool isPedestal, bool isZS, float zsCut,
 		bool commonModeOn, bool clusteringOn, std::vector<int> xChips,
-		std::vector<int> yChips);
+		std::vector<int> yChips, int mappings);
 	~RawdataParser();
 	void SetRunFlags(bool isRawPedestal, bool isPedestal);
 	int AnalyzeWord(int rawdata, int rawdata_before, int rawdata_before_two);
@@ -72,7 +72,7 @@ private:
 
 	signed int unixtimestamp;
 	int timestamp_us;
-	int eventNr = 1;
+	int eventNr;
 	unsigned int runNr;
 	int headerLDC;
 	int headerEquipment;

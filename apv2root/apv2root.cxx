@@ -30,7 +30,7 @@ int limit = 0;
 float zsCut = 0;
 bool commonModeOn = true;
 bool clusteringOn = true;
-
+int mappingType = 0;
 
 bool pFound = false;
 bool rdFound = false;
@@ -85,6 +85,14 @@ int main(int argc, char**argv)
 			clusteringFound = true;
 			clusteringOn = atoi(argv[i + 1]);
 
+		}
+		else if (strncmp(argv[i], "-map", 4) == 0)
+		{
+			mappingType = atoi(argv[i + 1]);
+		}
+		else if (strncmp(argv[i], "-n", 2) == 0)
+		{
+			numEvents = atoi(argv[i + 1]);
 		}
 		else if (strncmp(argv[i], "-x", 2) == 0)
 		{
@@ -213,7 +221,7 @@ int main(int argc, char**argv)
 		{
 		
 			parser = new RawdataParser(fileName, pedestalName, isRawPedestal,
-					isPedestal, isZS, zsCut, commonModeOn, clusteringOn, xChips, yChips);
+					isPedestal, isZS, zsCut, commonModeOn, clusteringOn, xChips, yChips, mappingType);
 
 
 		}
@@ -320,6 +328,7 @@ int printUsage(std::string errorMessage)
 	printf("-cl: Add clustering.\n\n");
 	printf("-x: mapping of chips, list of chips in x direction separated by comma\n\n");
 	printf("-y: mapping of chips, list of chips in y direction separated by comma\n\n");
+	printf("-map: mapping of detector strips to APV channels: 0 [APV mapping, default], 1 [CMS mapping], 2 [CMS inverted mapping]\n\n");
 
 	return -1;
 }
