@@ -20,6 +20,8 @@
 #include <chrono>
 
 TString fileInName = "";
+TString fileOutNamePDF = "";
+TString fileOutNameCanvas = "";
 TString fileOutName = "";
 TString fileNormName = "";
 std::string pAction = "";
@@ -40,9 +42,9 @@ double pzmax = 0;
 double pTimeSignal = 0;
 double pTimeBackground = 0;
 double pxmin = 0;
-double pxmax=256;
+double pxmax=1280;
 double pymin = 0;
-double pymax=256;
+double pymax=1280;
 
 int printUsage(std::string errorMessage, char* argv);
 
@@ -62,6 +64,8 @@ int main(int argc, char**argv) {
 		} else if (strncmp(argv[i], "-fout", 5) == 0) {
 			fileOutFound = true;
 			fileOutName = argv[i + 1];
+			fileOutNamePDF = fileOutName;
+			fileOutNameCanvas = fileOutName;
 		} else if (strncmp(argv[i], "-ns", 3) == 0) {
 			pTimeSignal = atof(argv[i + 1]);
 		} else if (strncmp(argv[i], "-nb", 3) == 0) {
@@ -244,14 +248,14 @@ int main(int argc, char**argv) {
 			TString pdfName = "";
 			if (plotLog) {
 				c1->SetLogz(true);
-				pdfName = fileOutName.ReplaceAll(".json", "_LOG.pdf");
+				pdfName = fileOutNamePDF.ReplaceAll(".json", "_LOG.pdf");
 			} else {
-				pdfName = fileOutName.ReplaceAll(".json", ".pdf");
+				pdfName = fileOutNamePDF.ReplaceAll(".json", ".pdf");
 			}
 			c1->SaveAs(pdfName);
 		}
 		if (plotCanvas) {
-			TString rootName = fileOutName.ReplaceAll(".json", ".root");
+			TString rootName = fileOutNameCanvas.ReplaceAll(".json", ".root");
 			c1->SaveAs(rootName);
 		}
 
